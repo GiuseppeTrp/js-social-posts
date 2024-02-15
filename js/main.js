@@ -60,48 +60,128 @@ const posts = [
 
 
 
-// Seleziono l'elemento con id "post-added" nel DOM
+// Seleziona l'elemento nel DOM dove verranno aggiunti i post
 const addPost = document.querySelector("#post-added");
 
-// Itero su ogni post nell'array
+// Itera su ogni post nell'array dei post
 posts.forEach(post => {
-    // Creo un elemento div per ogni post
+    // Crea un nuovo elemento div che rappresenterà un post
     const card = document.createElement("div");
-    // Aggiungo le classi  all'elemento appena creato
+    // Aggiunge le classi "card" e "my-3" al nuovo elemento div
     card.classList.add("card", "my-3");
 
-    // Creo un elemento div per l'header della carta
+    // Crea un nuovo elemento div per l'header della carta
     const headCard = document.createElement("div");
+    // Aggiunge la classe "card-header" al nuovo elemento div
     headCard.classList.add("card-header");
 
-    // Creo un elemento div per l'autore
+    // Crea un nuovo elemento div per l'autore
     const author = document.createElement("div");
+    // Aggiunge le classi "author", "d-flex" e "align-items-center" al nuovo elemento div
     author.classList.add("author", "d-flex", "align-items-center");
 
-    // Creo un elemento img per l'immagine dell'autore
+    // Crea un nuovo elemento img per l'immagine dell'autore
     const authImage = document.createElement("img");
-    // Imposto l'attributo "src" dell'immagine con l'URL dell'immagine dell'autore
+    // Imposta l'attributo "src" dell'immagine dell'autore con l'URL dell'immagine specificata nel post corrente
     authImage.src = post.author.image;
-    // Aggiungo la classe "rounded-circle" all'immagine
-    authImage.classList.add("rounded-circle");
+    // Aggiunge le classi  all'elemento img
+    authImage.classList.add("rounded-circle", "mini-img");
 
-    // Creo un elemento span per il nome dell'autore
-    const authorName = document.createElement('span');
-    // Imposto il testo del nome dell'autore con il nome presente nel post corrente
+    // Crea un nuovo elemento span per il nome dell'autore
+    const authorName = document.createElement("span");
+    // Imposta il testo del nome dell'autore con il nome specificato nel post corrente
     authorName.textContent = post.author.name;
 
-    // Aggiungo l'elemento span del nome dell'autore all'elemento div dell'autore
+    // Aggiunge l'elemento span del nome dell'autore all'elemento div dell'autore
     author.appendChild(authorName);
-    // Aggiungo l'elemento img dell'immagine dell'autore all'elemento div dell'autore
+    // Aggiunge l'elemento img dell'immagine dell'autore all'elemento div dell'autore
     author.appendChild(authImage);
 
-    // Aggiungo l'elemento div dell'autore all'elemento div dell'header della carta
+    // Aggiunge l'elemento div dell'autore all'elemento div dell'header della carta
     headCard.appendChild(author);
 
-    // Aggiungo l'elemento div dell'header della carta all'elemento della carta
+    // Aggiunge l'elemento div dell'header della carta all'elemento della carta
     card.appendChild(headCard);
 
-    // Aggiungo la carta all'elemento con id "post-added" nel DOM
+    // Crea un nuovo elemento div per il testo del post
+    const text = document.createElement("div");
+    // Aggiunge la classe "card-body" all'elemento div del testo del post
+    text.classList.add("card-body");
+    // Imposta il testo del contenuto del post con il contenuto specificato nel post corrente
+    text.textContent = post.content;
+
+    // Aggiunge l'elemento div del testo del post all'elemento della carta
+    card.appendChild(text);
+
+    // Crea un nuovo elemento div per l'immagine del post
+    const postImage = document.createElement("div");
+    // Aggiunge la classe "post-image" all'elemento div dell'immagine del post
+    postImage.classList.add("post-image");
+    // Crea un nuovo elemento img per l'immagine del post
+    const image = document.createElement("img");
+    // Imposta l'attributo "src" dell'immagine del post con l'URL specificato nel post corrente
+    image.src = post.media;
+    // Aggiunge l'elemento img dell'immagine del post all'elemento div dell'immagine del post
+    postImage.appendChild(image);
+    // Aggiunge l'elemento div dell'immagine del post all'elemento della carta
+    card.appendChild(postImage);
+
+    // Crea un nuovo elemento div per il footer del post
+    const footer = document.createElement("div");
+    // Aggiunge la classe "footer" all'elemento div del footer del post
+    footer.classList.add("footer");
+
+    // Crea un nuovo elemento div per i "Mi Piace" e il bottone "Mi Piace"
+    const likes = document.createElement("div");
+    // Aggiunge le classi "likes" e "js-likes" all'elemento div dei "Mi Piace"
+    likes.classList.add("likes", "js-likes");
+
+    const likesAction = document.createElement("div");
+    // Aggiunge la classe "likes-action" all'elemento div dell'azione "Mi Piace"
+    likesAction.classList.add("likes-action");
+
+    const likeButton = document.createElement("a");
+    // Aggiunge la classe "like-button" all'elemento a del bottone "Mi Piace"
+    likeButton.classList.add("like-button");
+    // Imposta l'attributo "data-postid" con l'id del post corrente per identificarlo
+    likeButton.dataset.postid = post.id;
+
+    const likeButtonIcon = document.createElement("i");
+    // Aggiunge le classi "button-icon", "fas" e "fa-thumbs-up" all'elemento i dell'icona del bottone "Mi Piace"
+    likeButtonIcon.classList.add("button-icon", "fas", "fa-thumbs-up");
+    // Imposta l'attributo "aria-hidden" per indicare che l'icona non è significativa per la descrizione testuale
+    likeButtonIcon.setAttribute("aria-hidden", "true");
+
+    const likeButtonLabel = document.createElement("span");
+    // Aggiunge la classe "button-label" all'elemento span del testo del bottone "Mi Piace"
+    likeButtonLabel.classList.add("button-label");
+    // Imposta il testo del bottone "Mi Piace"
+    likeButtonLabel.textContent = "Mi Piace";
+
+    // Aggiunge l'icona e il testo del bottone "Mi Piace" all'elemento a
+    likeButton.appendChild(likeButtonIcon);
+    likeButton.appendChild(likeButtonLabel);
+
+    // Aggiunge l'elemento a del bottone "Mi Piace" all'elemento div dell'azione "Mi Piace"
+    likesAction.appendChild(likeButton);
+
+    const likesCounter = document.createElement("div");
+    // Aggiunge la classe "likes-counter" all'elemento div del contatore dei "Mi Piace"
+    likesCounter.classList.add("likes-counter");
+    // Imposta il contenuto del contatore dei "Mi Piace" con il numero di "Mi Piace" del post corrente
+    likesCounter.innerHTML = `Piace a <b id="like-counter-${post.id}" class="js-likes-counter">${post.likes}</b> persone`;
+
+    // Aggiunge l'azione "Mi Piace" e il contatore dei "Mi Piace" all'elemento dei "Mi Piace"
+    likes.appendChild(likesAction);
+    likes.appendChild(likesCounter);
+
+    // Aggiunge l'elemento dei "Mi Piace" al footer del post
+    footer.appendChild(likes);
+
+    // Aggiunge il footer del post all'elemento della carta
+    card.appendChild(footer);
+
+    // Aggiunge la carta all'elemento con id "post-added" nel DOM
     addPost.appendChild(card);
 });
 
