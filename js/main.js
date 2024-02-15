@@ -63,6 +63,25 @@ posts.forEach(function(post) {
 
 
 
+// creo una variabile per prendere l'elemento con id post-added
+const addPost = document.querySelector("#post-added");
+
+
+// itero su ogni post dell array
+posts.forEach(function(post){
+    // creo una card per ogni iterazione(nuovo elemento)
+    const card= document.createElement("div");
+    // aggiungo una classe al nuovo elemento
+    card.classList.add("card");
+// aggiungo gli elementi all'id "post-added"
+addPost.appendChild(card);
+})
+
+
+
+
+// procederò inserendo gli elementi  dell'html da js
+
 
 
 
