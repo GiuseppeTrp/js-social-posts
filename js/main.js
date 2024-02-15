@@ -57,30 +57,57 @@ const posts = [
 ];
 
 
-posts.forEach(function(post) {
-    console.log(post.id);
+
+
+
+// Seleziono l'elemento con id "post-added" nel DOM
+const addPost = document.querySelector("#post-added");
+
+// Itero su ogni post nell'array
+posts.forEach(post => {
+    // Creo un elemento div per ogni post
+    const card = document.createElement("div");
+    // Aggiungo le classi  all'elemento appena creato
+    card.classList.add("card", "my-3");
+
+    // Creo un elemento div per l'header della carta
+    const headCard = document.createElement("div");
+    headCard.classList.add("card-header");
+
+    // Creo un elemento div per l'autore
+    const author = document.createElement("div");
+    author.classList.add("author", "d-flex", "align-items-center");
+
+    // Creo un elemento img per l'immagine dell'autore
+    const authImage = document.createElement("img");
+    // Imposto l'attributo "src" dell'immagine con l'URL dell'immagine dell'autore
+    authImage.src = post.author.image;
+    // Aggiungo la classe "rounded-circle" all'immagine
+    authImage.classList.add("rounded-circle");
+
+    // Creo un elemento span per il nome dell'autore
+    const authorName = document.createElement('span');
+    // Imposto il testo del nome dell'autore con il nome presente nel post corrente
+    authorName.textContent = post.author.name;
+
+    // Aggiungo l'elemento span del nome dell'autore all'elemento div dell'autore
+    author.appendChild(authorName);
+    // Aggiungo l'elemento img dell'immagine dell'autore all'elemento div dell'autore
+    author.appendChild(authImage);
+
+    // Aggiungo l'elemento div dell'autore all'elemento div dell'header della carta
+    headCard.appendChild(author);
+
+    // Aggiungo l'elemento div dell'header della carta all'elemento della carta
+    card.appendChild(headCard);
+
+    // Aggiungo la carta all'elemento con id "post-added" nel DOM
+    addPost.appendChild(card);
 });
 
 
 
-// creo una variabile per prendere l'elemento con id post-added
-const addPost = document.querySelector("#post-added");
 
-
-// itero su ogni post dell array
-posts.forEach(function(post){
-    // creo una card per ogni iterazione(nuovo elemento)
-    const card= document.createElement("div");
-    // aggiungo una classe al nuovo elemento
-    card.classList.add("card");
-// aggiungo gli elementi all'id "post-added"
-addPost.appendChild(card);
-})
-
-
-
-
-// procederò inserendo gli elementi  dell'html da js
 
 
 
